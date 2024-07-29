@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of all Courses</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 70%;
+        }
+
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+
+        tr:hover {
+            background-color: #D6EEEE;
+        }
+
+        table.center{
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h2{
+            text-align: center;
+        }
+
+        .btn {
+              background-color: rgb(255,0,0);
+              border: none;
+              color: black;
+              padding: 8px 12px;
+              font-size: 12px;
+              cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: rgb(139,0,0);
+        }
+    </style>
+</head>
+
+
+<body>
+<div>
+    <h2>Courses Database</h2>
+<table class="table table-striped center">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Class Code</th>
+        <th scope="col">Description</th>
+        <th scope="col">Capacity</th>
+        <th scope="col">Credit Worth</th>
+        <th scope="col" style="width:10%">DELETE</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="course : ${courses}">
+        <td th:text="${course.id}"></td>
+        <td th:text="${course.classCode}"></td>
+        <td th:text="${course.description}"></td>
+        <td th:text="${course.capacity}"></td>
+        <td th:text="${course.creditWorth}"></td>
+        <td>
+            <form th:object="${course}" th:action="@{delete_course/{id}(id=${course.id})}" method="post" role="form">
+                <button class="btn" type="submit">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>

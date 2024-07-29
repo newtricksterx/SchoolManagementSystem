@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Student</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        input[type=text], input[type=date], input[type=number]{
+          width: 100%;
+          padding: 12px 20px;
+          margin: 2px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 2px;
+          box-sizing: border-box;
+        }
+
+        input[type=text]:focus, input[type=date]:focus, input[type=number]:focus {
+            border: 3px solid #555;
+        }
+
+        input[type=submit] {
+          width: 100%;
+          background-color: #4CAF50;
+          color: white;
+          padding: 12px 20px;
+          margin: 2px 0;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+          background-color: #45a049;
+        }
+
+        div {
+          border-radius: 5px;
+          background-color: #f2f2f2;
+          padding: 10px;
+        }
+
+        h2 {
+          text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h2>Add Student</h2>
+
+<div class="container">
+    <form method="post" role="form" th:object="${student}" th:action="@{add_student/save}">
+        <div class="mb-3">
+            <label class="form-label">First Name: </label>
+            <label>
+                <input type="text" class="form-control" th:field="*{firstName}" required>
+                <p th:errors = "*{firstName}" class="text-danger"
+                   th:if="${#fields.hasErrors('firstName')}"></p>
+            </label>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Last Name: </label>
+            <label>
+                <input type="text" class="form-control" th:field="*{lastName}" required>
+                <p th:errors = "*{lastName}" class="text-danger"
+                   th:if="${#fields.hasErrors('lastName')}"></p>
+            </label>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Date of Birth: </label>
+            <label>
+                <input type="date" class="form-control" th:field="*{dob}">
+            </label>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Year Group: </label>
+            <label>
+                <input type="number" class="form-control" th:field="*{yearGroup}">
+            </label>
+        </div>
+        <input type="submit" value="Add">
+    </form>
+
+</div>
+
+</body>
+</html>
